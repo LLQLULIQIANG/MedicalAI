@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: AI
+  profiles:
+    active: local
+  # 默认使用内存库便于本地启动；生产请在 application-prod.yml 或环境变量中配置真实 PostgreSQL
+  datasource:
+    url: jdbc:h2:mem:medicalai;DB_CLOSE_DELAY=-1;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+  ai:
+    dashscope:
+      # 使用环境变量注入密钥，避免泄露
+      api-key: ${DASHSCOPE_API_KEY:}
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        model: gemma3:1b
+    # 未启动 MCP 服务时不要启用客户端，否则启动阶段会连接8127 等地址并导致整应用失败
+    mcp:
+      client:
+        enabled: false
+server:
+  port: 8123
+  servlet:
+    context-path: /api
+
+# springdoc-openapi config
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+  group-configs:
+    - group: 'default'
+      paths-to-match: '/**'
+      packages-to-scan: org.example.ai.controller
+# knife4j config
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+# searchAPI（网页搜索工具，未配置 key 时相关工具可能不可用）
+search-api:
+  api-key: ${SEARCH_API_KEY:}

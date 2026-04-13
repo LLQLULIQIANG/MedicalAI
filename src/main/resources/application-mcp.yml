@@ -1,0 +1,13 @@
+# 需要 MCP（SSE + stdio）时追加 profile：spring.profiles.active=local,mcp
+# 并先启动 SSE 服务（如 localhost:8127）及 mcp-servers.json 中配置的子进程
+spring:
+  ai:
+    mcp:
+      client:
+        enabled: true
+        sse:
+          connections:
+            server1:
+              url: http://localhost:8127
+        stdio:
+          servers-configuration: classpath:mcp-servers.json

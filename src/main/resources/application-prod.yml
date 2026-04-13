@@ -1,0 +1,15 @@
+# 生产环境：全部通过环境变量注入，勿把 sk- 密钥或数据库口令写进仓库
+spring:
+  application:
+    name: AI
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  ai:
+    dashscope:
+      api-key: ${DASHSCOPE_API_KEY}
+    chat:
+      options:
+        model: qwen-plus
