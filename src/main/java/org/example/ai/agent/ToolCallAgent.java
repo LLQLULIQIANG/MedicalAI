@@ -35,8 +35,6 @@ public class ToolCallAgent extends ReActAgent {
 
     // 保存工具调用信息的响应结果（要调用那些工具）
     private ChatResponse toolCallChatResponse;
-    // 保存最近一次模型输出文本（用于无工具调用时直接返回给前端）
-    private String latestAssistantText = "";
 
     // 工具调用管理者
     private final ToolCallingManager toolCallingManager;
@@ -84,7 +82,6 @@ public class ToolCallAgent extends ReActAgent {
             List<AssistantMessage.ToolCall> toolCallList = assistantMessage.getToolCalls();
             // 输出提示信息
             String result = assistantMessage.getText();
-            this.latestAssistantText = StrUtil.nullToDefault(result, "");
             log.info(getName() + "的思考：" + result);
             log.info(getName() + "选择了 " + toolCallList.size() + " 个工具来使用");
             String toolCallInfo = toolCallList.stream()
@@ -95,8 +92,6 @@ public class ToolCallAgent extends ReActAgent {
             if (toolCallList.isEmpty()) {
                 // 只有不调用工具时，才需要手动记录助手消息
                 getMessageList().add(assistantMessage);
-                // 无工具可调用时结束循环，避免空转到 maxSteps
-                setState(AgentState.FINISHED);
                 return false;
             } else {
                 // 需要调用工具时，无需记录助手消息，因为调用工具时会自动记录
@@ -105,23 +100,7 @@ public class ToolCallAgent extends ReActAgent {
         } catch (Exception e) {
             log.error(getName() + "的思考过程遇到了问题：" + e.getMessage());
             getMessageList().add(new AssistantMessage("处理时遇到了错误：" + e.getMessage()));
-            setState(AgentState.ERROR);
             return false;
-        }
-    }
-
-    @Override
-    public String step() {
-        try {
-            boolean shouldAct = think();
-            if (!shouldAct) {
-                return StrUtil.isNotBlank(latestAssistantText) ? latestAssistantText : "任务已完成";
-            }
-            return act();
-        } catch (Exception e) {
-            setState(AgentState.ERROR);
-            log.error("步骤执行失败", e);
-            return "步骤执行失败：" + e.getMessage();
         }
     }
 

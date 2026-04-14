@@ -21,11 +21,11 @@ class AppTest {
         String message = "你好，我是LLQ";
         String answer = medicalAIApp.doChat(message, chatId);
         // 第二轮
-        message = "我想";
+        message = "我想了解心脏病有什么症状？";
         answer = medicalAIApp.doChat(message, chatId);
         Assertions.assertNotNull(answer);
         // 第三轮
-        message = "我的另一半叫什么来着？刚跟你说过，帮我回忆一下";
+        message = "心脏病有什么症状？";
         answer = medicalAIApp.doChat(message, chatId);
         Assertions.assertNotNull(answer);
     }
@@ -41,7 +41,7 @@ class AppTest {
     @Test
     void doChatWithRag() {
         String chatId = UUID.randomUUID().toString();
-        String message = "我已经结婚了，但是婚后关系不太亲密，怎么办？";
+        String message = "心脏病有什么症状？";
         String answer = medicalAIApp.doChatWithRag(message, chatId);
         Assertions.assertNotNull(answer);
     }
@@ -49,22 +49,22 @@ class AppTest {
     @Test
     void doChatWithTools() {
         // 测试联网搜索问题的答案
-        testMessage("周末想带女朋友去上海约会，推荐几个适合情侣的小众打卡地？");
+        testMessage("心脏病有什么症状？");
 
         // 测试网页抓取：恋爱案例分析
-        testMessage("最近和对象吵架了，看看编程导航网站（codefather.cn）的其他情侣是怎么解决矛盾的？");
+        testMessage("心脏病有什么症状？");
 
         // 测试资源下载：图片下载
-        testMessage("直接下载一张适合做手机壁纸的星空情侣图片为文件");
+        testMessage("心脏病有什么症状？");
 
         // 测试终端操作：执行代码
-        testMessage("执行 Python3 脚本来生成数据分析报告");
+        testMessage("心脏病有什么症状？");
 
         // 测试文件操作：保存用户档案
-        testMessage("保存我的恋爱档案为文件");
+        testMessage("心脏病有什么症状？");
 
         // 测试 PDF 生成
-        testMessage("生成一份‘七夕约会计划’PDF，包含餐厅预订、活动流程和礼物清单");
+        testMessage("心脏病有什么症状？");
     }
 
     private void testMessage(String message) {
@@ -81,7 +81,7 @@ class AppTest {
 //        String answer =  loveApp.doChatWithMcp(message, chatId);
 //        Assertions.assertNotNull(answer);
         // 测试图片搜索 MCP
-        String message = "帮我搜索一些哄另一半开心的图片";
+        String message = "心脏病有什么症状？";
         String answer =  medicalAIApp.doChatWithMcp(message, chatId);
         Assertions.assertNotNull(answer);
     }

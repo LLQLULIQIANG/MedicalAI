@@ -8,7 +8,6 @@ import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.tool.ToolCallback;
 import org.springframework.http.MediaType;
 import org.springframework.http.codec.ServerSentEvent;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -101,15 +100,6 @@ public class AiController {
      */
     @GetMapping("/manus/chat")
     public SseEmitter doChatWithManus(String message) {
-        if (!StringUtils.hasText(message)) {
-            SseEmitter emitter = new SseEmitter(30000L);
-            try {
-                emitter.send("请输入有效问题后再试。");
-            } catch (IOException ignored) {
-            }
-            emitter.complete();
-            return emitter;
-        }
         AIManus Manus = new AIManus(allTools, dashscopeChatModel);
         return Manus.runStream(message);
     }
