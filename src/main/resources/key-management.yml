@@ -1,0 +1,17 @@
+# 统一密钥管理文件（请勿提交真实值）
+# 使用方式：在系统环境变量中配置以下键名。
+#
+# 1) 阿里云百炼 / DashScope
+#    申请地址：https://dashscope.console.aliyun.com/
+# 2) SearchAPI（网页搜索）
+#    申请地址：https://www.searchapi.io/
+# 3) 高德开放平台（MCP 地图）
+#    申请地址：https://lbs.amap.com/
+app:
+  keys:
+    # 阿里云百炼 / DashScope Key（后端 Chat/Embedding 必需）
+    dashscope: sk-2009b9ae71d44119a7ee94de5c52dafd
+    # SearchAPI Key（网页搜索工具可选）
+    searchapi: jVQsqzNf1ZG8ePGsniLLT8RP
+    # 高德地图开放平台 Key（MCP 地图工具可选）
+    amap: ${AMAP_MAPS_API_KEY:}

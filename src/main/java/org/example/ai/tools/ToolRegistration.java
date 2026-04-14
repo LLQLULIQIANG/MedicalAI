@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ToolRegistration {
 
+    /** SearchAPI：https://www.searchapi.io/ */
     @Value("${search-api.api-key}")
     private String searchApiKey;
 

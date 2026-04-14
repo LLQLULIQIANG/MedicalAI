@@ -7,6 +7,7 @@
         "@amap/amap-maps-mcp-server"
       ],
       "env": {
+        "_comment": "AMAP_MAPS_API_KEY 来自高德开放平台 https://lbs.amap.com/",
         "AMAP_MAPS_API_KEY": "${AMAP_MAPS_API_KEY}"
       }
     },

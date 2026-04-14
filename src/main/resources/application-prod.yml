@@ -1,5 +1,7 @@
 # 生产环境：全部通过环境变量注入，勿把 sk- 密钥或数据库口令写进仓库
 spring:
+  config:
+    import: optional:classpath:key-management.yml
   application:
     name: AI
   datasource:
@@ -9,7 +11,8 @@ spring:
     driver-class-name: org.postgresql.Driver
   ai:
     dashscope:
-      api-key: ${DASHSCOPE_API_KEY}
+      # 密钥来源见 key-management.yml（阿里云百炼 / DashScope）
+      api-key: ${app.keys.dashscope}
     chat:
       options:
         model: qwen-plus

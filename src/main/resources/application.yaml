@@ -1,4 +1,6 @@
 spring:
+  config:
+    import: optional:classpath:key-management.yml
   application:
     name: AI
   profiles:
@@ -11,8 +13,8 @@ spring:
     password: ""
   ai:
     dashscope:
-      # 使用环境变量注入密钥，避免泄露
-      api-key: ${DASHSCOPE_API_KEY:}
+      # 密钥来源见 key-management.yml（阿里云百炼 / DashScope）
+      api-key: ${app.keys.dashscope:}
     ollama:
       base-url: http://localhost:11434
       chat:
@@ -45,4 +47,5 @@ knife4j:
     language: zh_cn
 # searchAPI（网页搜索工具，未配置 key 时相关工具可能不可用）
 search-api:
-  api-key: ${SEARCH_API_KEY:}
+  # 密钥来源见 key-management.yml（https://www.searchapi.io/）
+  api-key: ${app.keys.searchapi:}

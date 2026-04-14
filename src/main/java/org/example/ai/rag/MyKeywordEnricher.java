@@ -21,6 +21,7 @@ public class MyKeywordEnricher {
     @Resource
     private ChatModel dashscopeChatModel;
 
+    /** 阿里云百炼 / DashScope：https://dashscope.console.aliyun.com/ */
     @Value("${spring.ai.dashscope.api-key:}")
     private String dashscopeApiKey;
 

@@ -18,6 +18,7 @@ import org.springframework.context.annotation.Configuration;
 @Slf4j
 public class MedicalAppRagCloudAdvisorConfig {
 
+    /** 阿里云百炼 / DashScope：https://dashscope.console.aliyun.com/ */
     @Value("${spring.ai.dashscope.api-key}")
     private String dashScopeApiKey;
 
